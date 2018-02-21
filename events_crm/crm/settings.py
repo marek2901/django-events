@@ -26,7 +26,8 @@ SECRET_KEY = 'rgu3rthop0q1%bqercwbwzln-#&t@qgqtfcfr(ww(4m2v2=o1^'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '0.0.0.0'
+    '0.0.0.0',
+    'crm-demo-markostk.herokuapp.com'
 ]
 
 
