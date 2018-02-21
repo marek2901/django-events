@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# use this wrapper so you don't have to specify DB url in development
+# WARNING DO NOT USE FOR PRODUCTION
+
+DATABASE_URL='postgresql://localhost/events_crm' \
+  python $(dirname $0)/events_crm/manage.py "$@"
