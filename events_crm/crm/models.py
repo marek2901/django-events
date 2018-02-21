@@ -15,9 +15,9 @@ class Event(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
     start_date = models.DateTimeField(
-        blank=True, null=True)
+        blank=False, null=False)
     end_date = models.DateTimeField(
-        blank=True, null=True)
+        blank=False, null=False)
     created_date = models.DateTimeField(
         default=timezone.now)
     equipements = models.ManyToManyField(Equipement)
