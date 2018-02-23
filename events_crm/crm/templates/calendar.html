@@ -12,7 +12,7 @@
             right: 'month,basicWeek,basicDay'
           },
           navLinks: true, // can click day/week names to navigate views
-          eventLimit: true, // allow "more" link when too many events
+          eventLimit: false, // allow "more" link when too many events
           events: [
             {% for evnt in events %}
             {
