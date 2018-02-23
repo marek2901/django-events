@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'rgu3rthop0q1%bqercwbwzln-#&t@qgqtfcfr(ww(4m2v2=o1^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = ("DJANGO_EVENTS_DEBUG" in os.environ)
 
 ALLOWED_HOSTS = [
     '0.0.0.0',

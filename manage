@@ -4,4 +4,5 @@
 # WARNING DO NOT USE FOR PRODUCTION
 
 DATABASE_URL='postgresql://localhost/events_crm' \
+DJANGO_EVENTS_DEBUG='true'\
   python $(dirname $0)/events_crm/manage.py "$@"
