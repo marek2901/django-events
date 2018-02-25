@@ -1,1 +1,1 @@
-web: cd events_crm && gunicorn crm.wsgi --log-file -
+web: cd events_crm && newrelic-admin run-program gunicorn crm.wsgi --log-file -

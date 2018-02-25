@@ -10,6 +10,9 @@ class Equipement(models.Model):
     notes_text_field = models.TextField()
     daily_price = models.PositiveIntegerField()
 
+    def __str__(self):
+        return 'Wyposażenie: {}'.format(self.name)
+
 
 class Event(models.Model):
     # customer = models.ForeignKey('auth.User', on_delete=models.CASCADE) TODO
