@@ -26,7 +26,7 @@ pip install -r requirements.txt
 
 ## Running the tests
 
-> TODO
+`./manage test crm.tests`
 
 ### And coding style tests
 

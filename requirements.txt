@@ -5,5 +5,8 @@ django-jquery==3.1.0
 gunicorn==19.7.1
 pep8==1.7.1
 psycopg2-binary==2.7.4
+pudb==2017.1.4
+Pygments==2.2.0
 pytz==2018.3
+urwid==2.0.1
 whitenoise==3.3.1

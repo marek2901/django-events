@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 
 class Equipement(models.Model):
@@ -20,7 +21,8 @@ class Event(models.Model):
         blank=False, null=False)
     created_date = models.DateTimeField(
         default=timezone.now)
-    equipements = models.ManyToManyField(Equipement)
+    equipements = models.ManyToManyField(Equipement, blank=True)
+    users = models.ManyToManyField(User, blank=True)
 
     def __str__(self):
         return self.name
