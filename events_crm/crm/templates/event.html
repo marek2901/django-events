@@ -1,5 +1,55 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>{{ event.name }}</h1>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title text-center">{{ event.name }}</h3>
+      </div>
+      <div class="panel-body">
+        <div class="col-md-6">
+          <div class="well well-sm">{{ event.description }}</div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="panel panel-default">
+              <div class="panel-heading">Czas trwania:</div>
+              <div class="panel-body">
+                <div class="col-md-6 text-center">
+                  Od  <span class="label label-default">{{event.start_date}}</span>
+                </div>
+                <div class="col-md-6 text-center">
+                  Do  <span class="label label-default">{{event.end_date}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="panel panel-default">
+              <div class="panel-heading">Wyposażenie:</div>
+
+              <ul class="list-group">
+                {% for equip in event.equipements.all %}
+                  <li class="list-group-item">
+                    <b>{{equip.name}}</b> numer seryjny: {{equip.serial_n}}
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <div class="panel panel-default">
+              <div class="panel-heading">Uczestnicy:</div>
+
+              <ul class="list-group">
+                {% for usr in event.users.all %}
+                  <li class="list-group-item">
+                    <b>{{usr.username}}</b> {{usr.email}}
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 {% endblock content %}

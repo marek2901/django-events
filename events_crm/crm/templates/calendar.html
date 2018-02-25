@@ -17,7 +17,7 @@
             {% for evnt in events %}
             {
               title: '{{ evnt.name }}',
-              url: 'http://google.com/',
+              url: "{%  url 'single_event' evnt.id %}",
               start: '{{ evnt.start_date|date:'Y-m-d H:i' }}',
               end: '{{ evnt.end_date|date:'Y-m-d H:i' }}'
             },
