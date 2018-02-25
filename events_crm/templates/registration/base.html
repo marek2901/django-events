@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Events CRM</title>
+        {% load bootstrap3 %}
+        {% load staticfiles %}
+        {% bootstrap_css %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+        {% bootstrap_javascript %}
+    </head>
+
+    <body>
+      <div class="container">
+        {% block content %}{% endblock content %}
+      </div>
+    </body>
+</html>

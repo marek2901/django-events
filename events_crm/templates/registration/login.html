@@ -1,0 +1,21 @@
+{% extends "registration/base.html" %}
+
+{% block content %}
+  <div class="container">
+    {% if form.errors %}
+      <div class="text-center">
+        <p class="login-err">Login Lub hasło nie prawidłowe</p>
+      </div>
+    {% endif %}
+    <form class="form-signin text-center" method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+      <h2 class="form-signin-heading">Logowanie</h2>
+      Nazwa użytkownika:
+      {{ form.username }}
+      Hasło:
+      {{ form.password }}
+      <button class="btn btn-large btn-primary" type="submit">Sign in</button>
+      <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+  </div>
+{% endblock %}
