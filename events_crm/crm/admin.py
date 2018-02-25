@@ -1,3 +1,5 @@
 from django.contrib import admin
+from crm.models import Event, Equipement
 
-# Register your models here.
+admin.site.register(Event)
+admin.site.register(Equipement)
