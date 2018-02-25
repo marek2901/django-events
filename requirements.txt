@@ -3,6 +3,7 @@ Django==2.0.2
 django-bootstrap3==9.1.0
 django-jquery==3.1.0
 gunicorn==19.7.1
+newrelic==2.104.0.86
 pep8==1.7.1
 psycopg2-binary==2.7.4
 pudb==2017.1.4
