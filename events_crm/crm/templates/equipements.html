@@ -20,7 +20,7 @@
   </thead>
   <tbody>
     {% for equipement in equipements %}
-      <tr class='clickable-row' data-notes='{{ equipement.notes|default:"Brak Notatek" }}'>
+      <tr class='clickable-row' data-notes='{{ equipement.notes_text_field|default:"Brak Notatek" }}'>
         <td>{{ equipement.name }}</td>
         <td>{{ equipement.serial_n }}</td>
       </tr>
