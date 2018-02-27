@@ -21,6 +21,10 @@ class EventRetrivalPolicyTest(TestCase):
             username='testuserother',
             password='testpswd!@#R'
         )
+        self.moderator = User.objects.create(
+            username='moderatoro',
+            password='testpswd!@#R'
+        )
         self.super_user = User.objects.create_superuser(
             'foo', password='testpswd!@#R', email='tert@admin.com'
         )
@@ -31,6 +35,7 @@ class EventRetrivalPolicyTest(TestCase):
             end_date=datetime.datetime(2011, 8, 25, 8, 15, 12, 0, pytz.UTC),
         )
         self.event.users.add(self.user)
+        self.event.moderators.add(self.moderator)
 
         self.other_event = Event.objects.create(
             name='OTHER Test Event',
@@ -43,6 +48,19 @@ class EventRetrivalPolicyTest(TestCase):
         self.assertEqual(
             self.event,
             event_or_404(self.user, self.event.id)
+        )
+
+    def test_event_retrived_when_user_can_see_and_moderate(self):
+        self.event.moderators.add(self.user)
+        self.assertEqual(
+            self.event,
+            event_or_404(self.user, self.event.id)
+        )
+
+    def test_event_retrived_when_user_id_moderator(self):
+        self.assertEqual(
+            self.event,
+            event_or_404(self.moderator, self.event.id)
         )
 
     def test_404_when_user_cannot_retreive(self):
@@ -59,6 +77,19 @@ class EventRetrivalPolicyTest(TestCase):
         self.assertEqual(
             [self.event],
             list(events_for_user(self.user).all())
+        )
+
+    def test_evets_for_user_returns_owned_or_moderated_event(self):
+        self.event.moderators.add(self.user)
+        self.assertEqual(
+            [self.event],
+            list(events_for_user(self.user).all())
+        )
+
+    def test_evets_for_user_returns_moderated_event(self):
+        self.assertEqual(
+            [self.event],
+            list(events_for_user(self.moderator).all())
         )
 
     def test_all_events_for_admin(self):

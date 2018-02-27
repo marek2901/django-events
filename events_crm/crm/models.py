@@ -28,7 +28,9 @@ class Event(models.Model):
     created_date = models.DateTimeField(
         default=timezone.now)
     equipements = models.ManyToManyField(Equipement, blank=True)
-    users = models.ManyToManyField(User, blank=True)
+    users = models.ManyToManyField(User, blank=True, related_name='users')
+    moderators = models.ManyToManyField(
+        User, blank=True, related_name='moderators')
 
     def __str__(self):
         return self.name
