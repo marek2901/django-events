@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block additional_css %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/clickable_row.css' %}">
+{% endblock %}
+
+{% block additional_js %}
+  {% load static %}
+  <script type="text/javascript" src="{% static 'js/clickable_row.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Nazwa</th>
+      <th>Numer seryjny</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for equipement in equipements %}
+      <tr class='clickable-row' data-notes='{{ equipement.notes|default:"Brak Notatek" }}'>
+        <td>{{ equipement.name }}</td>
+        <td>{{ equipement.serial_n }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+  {% if equipements.has_other_pages %}
+    <ul class="pagination">
+      {% if equipements.has_previous %}
+        <li><a href="?page={{ equipements.previous_page_number }}">&laquo;</a></li>
+      {% else %}
+        <li class="disabled"><span>&laquo;</span></li>
+      {% endif %}
+      {% for i in equipements.paginator.page_range %}
+        {% if equipements.number == i %}
+          <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% else %}
+          <li><a href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+      {% endfor %}
+      {% if equipements.has_next %}
+        <li><a href="?page={{ equipements.next_page_number }}">&raquo;</a></li>
+      {% else %}
+        <li class="disabled"><span>&raquo;</span></li>
+      {% endif %}
+    </ul>
+{% endif %}
+
+<div class="modal fade" id="equipementNotesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Notatki</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

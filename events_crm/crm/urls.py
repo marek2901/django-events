@@ -23,4 +23,5 @@ urlpatterns = [
     path('events/<int:eid>', views.single_event, name='single_event'),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('equipements/', views.equipements, name='all_equipements')
 ]
