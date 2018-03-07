@@ -1,11 +1,15 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
 
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.core.paginator import Paginator
 
 from crm.policies.event_retrival_policy import event_or_404, events_for_user
 
 from .models import Event, Equipement, Service
+from .forms import EquipementForm, ServiceForm
+from .services import create_or_update_service
 
 
 @login_required
@@ -40,13 +44,20 @@ def equipements(request):
 
 
 @login_required
-def equipements(request):
-    services_list = Service.objects.all()
-
-    paginator = Paginator(services_list, 15)
-
-    page = request.GET.get('page')
-
-    return render(request, 'services.html', {
-        'services': paginator.get_page(page)
-    })
+def services(request):
+    if request.method == 'POST':
+        form = ServiceForm(request.POST)
+        if form.is_valid():
+            create_or_update_service.call(form)
+            messages.success(request, 'Dodano Usługę')
+        else:
+            messages.error(request, 'Wystąpiły Błędy')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    else:
+        services_list = Service.objects.all()
+        paginator = Paginator(services_list, 15)
+        page = request.GET.get('page')
+        return render(request, 'services.html', {
+            'services': paginator.get_page(page),
+            'form': ServiceForm(),
+        })
