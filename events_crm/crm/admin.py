@@ -1,11 +1,12 @@
 from django.contrib import admin
-from crm.models import Event, Equipement, Profile, Skill
+from crm.models import Event, Equipement, Service, Profile, Skill
 
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
 admin.site.register(Event)
 admin.site.register(Equipement)
+admin.site.register(Service)
 
 
 #  Extended user model for Django admin

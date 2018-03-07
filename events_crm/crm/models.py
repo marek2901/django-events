@@ -17,6 +17,15 @@ class Equipement(models.Model):
         return 'Wyposażenie: {}'.format(self.name)
 
 
+class Service(models.Model):
+    name = models.CharField(max_length=200)
+    notes_text_field = models.TextField()
+    daily_price = models.PositiveIntegerField()
+
+    def __str__(self):
+        return 'Usługa: {}'.format(self.name)
+
+
 class Event(models.Model):
     # customer = models.ForeignKey('auth.User', on_delete=models.CASCADE) TODO
     name = models.CharField(max_length=200)
@@ -28,6 +37,7 @@ class Event(models.Model):
     created_date = models.DateTimeField(
         default=timezone.now)
     equipements = models.ManyToManyField(Equipement, blank=True)
+    services = models.ManyToManyField(Service, blank=True)
     users = models.ManyToManyField(User, blank=True, related_name='users')
     moderators = models.ManyToManyField(
         User, blank=True, related_name='moderators')

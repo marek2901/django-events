@@ -5,7 +5,7 @@ from django.core.paginator import Paginator
 
 from crm.policies.event_retrival_policy import event_or_404, events_for_user
 
-from .models import Event, Equipement
+from .models import Event, Equipement, Service
 
 
 @login_required
@@ -29,11 +29,24 @@ def single_event(request, eid):
 @login_required
 def equipements(request):
     equipement_list = Equipement.objects.all()
-    # Show 25 contacts per page
+
     paginator = Paginator(equipement_list, 15)
 
     page = request.GET.get('page')
 
     return render(request, 'equipements.html', {
         'equipements': paginator.get_page(page)
+    })
+
+
+@login_required
+def equipements(request):
+    services_list = Service.objects.all()
+
+    paginator = Paginator(services_list, 15)
+
+    page = request.GET.get('page')
+
+    return render(request, 'services.html', {
+        'services': paginator.get_page(page)
     })
