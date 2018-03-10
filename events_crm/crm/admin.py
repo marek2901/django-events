@@ -2,7 +2,7 @@ from django.contrib import admin
 from crm.models import Event, Equipement, Service, Profile, Skill
 
 from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 admin.site.register(Event)
 admin.site.register(Equipement)
@@ -21,6 +21,11 @@ class ProfileInline(admin.StackedInline):
 class CustomUserAdmin(UserAdmin):
     inlines = (ProfileInline, )
     list_display = ('username', 'email', 'skills', 'hourly_rate')
+    fieldsets = (
+        (None, {'fields': ('username', 'password')}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'email')}),
+        # ('Important dates', {'fields': ('last_login', 'date_joined')}),
+    )
 
     def skills(self, instance):
         return ', '.join(
@@ -39,3 +44,4 @@ class CustomUserAdmin(UserAdmin):
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
 admin.site.register(Skill)
+admin.site.unregister(Group)
