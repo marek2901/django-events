@@ -1,5 +1,5 @@
 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
-  Dodaj nową usługę
+  Dodaj nowe wyposażenie
 </button>
 
 <div id="myModal" class="modal fade" role="dialog">
@@ -7,12 +7,12 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Dodaj nową usługę</h4>
+        <h4 class="modal-title">Dodaj nowe wyposażenie</h4>
       </div>
       <div class="modal-body">
         {% load bootstrap3 %}
 
-        <form action="/services/" method="post" class="form">
+        <form action="/equipements/" method="post" class="form">
             {% csrf_token %}
             {% bootstrap_form form %}
             {% buttons %}

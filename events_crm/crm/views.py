@@ -9,7 +9,7 @@ from crm.policies.event_retrival_policy import event_or_404, events_for_user
 
 from .models import Event, Equipement, Service
 from .forms import EquipementForm, ServiceForm
-from .services import create_or_update_service
+from .services import create_or_update_service, create_or_update_equipement
 
 
 @login_required
@@ -32,15 +32,22 @@ def single_event(request, eid):
 
 @login_required
 def equipements(request):
-    equipement_list = Equipement.objects.all()
-
-    paginator = Paginator(equipement_list, 15)
-
-    page = request.GET.get('page')
-
-    return render(request, 'equipements.html', {
-        'equipements': paginator.get_page(page)
-    })
+    if request.method == 'POST':
+        form = EquipementForm(request.POST)
+        if form.is_valid():
+            create_or_update_equipement.call(form)
+            messages.success(request, 'Dodano Wyposażenie')
+        else:
+            messages.error(request, 'Wystąpiły Błędy')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    else:
+        equipement_list = Equipement.objects.all()
+        paginator = Paginator(equipement_list, 15)
+        page = request.GET.get('page')
+        return render(request, 'equipements.html', {
+            'equipements': paginator.get_page(page),
+            'form': EquipementForm()
+        })
 
 
 @login_required

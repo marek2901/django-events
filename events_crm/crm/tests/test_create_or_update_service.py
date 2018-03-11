@@ -5,7 +5,7 @@ from crm.forms import ServiceForm
 from crm.services import create_or_update_service
 
 
-class EventRetrivalPolicyTest(TestCase):
+class CreateOrUpdateServiceTest(TestCase):
     def setUp(self):
         self.serviceForm = ServiceForm(initial={
             'name': 'TEST NAME',
